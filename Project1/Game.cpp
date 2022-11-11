@@ -4,17 +4,20 @@
 void Game::init_variables()
 {
 	this->window = nullptr;
-
+	font.loadFromFile("GOUDYSTO.ttf");
+	;
 }
 
 void Game::init_window()
 {
 	this->videoMode.height = 600;
 	this->videoMode.width = 700;
-	this->window = new sf::RenderWindow(videoMode, "game title", sf::Style::None);
+	this->window = new sf::RenderWindow(videoMode, "4 in a row",sf::Style::Close|sf::Style::Titlebar);
 
-	music.openFromFile("audio.ogg");
+	music.openFromFile("Assets/Audio/audio.ogg");
+	music_game_end.openFromFile("Assets/Audio/gameend2.ogg");
 	music.setVolume(50);
+	music_game_end.setVolume(50);
 	music.play();
 	volume = true;
 	pvp = false;
@@ -65,9 +68,9 @@ void Game::update()
 		//std::cout << "is this looping ?0" << std::endl;
 		break;
 	case StateType::Score:
-		this->window->clear(sf::Color::White);
-		draw_Background_Image(*window);
-		draw_Player_Chip(*window);
+		main_Menu_Score(*window);
+		//window->clear();
+		statetype = StateType::Score;
 		break;
 	default:
 		break;
@@ -108,7 +111,6 @@ void Game::render()
 		break;
 	case StateType::GameOver:
 		
-
 		texture_button.loadFromFile("Assets/gameend/mainmenu_button.png");
 		texture_button_background.loadFromFile("Assets/gameend/text_background.png");
 		sprite_ending_button.setTexture(texture_button);
@@ -124,7 +126,7 @@ void Game::render()
 				if (switch_animation == 0 ) { j--; }
 				else j ++;
 				//std::cout << "next = "<< j << std::endl;
-				if (j!=0 && texture.loadFromFile("Assets/gameend/" + std::to_string(j) + ".png")) {};
+				if (j!=0 && texture.loadFromFile("Assets/gameend2/" + std::to_string(j) + ".png")) {};
 				sprite_ending.setTexture(texture);
 			}
 			window->draw(sprite_ending);
@@ -161,11 +163,13 @@ void Game::pollEvents()
 		else if (this->ev.type == sf::Event::MouseButtonReleased) {
 			player_Click();
 		}
-		else if (this->ev.type == sf::Event::MouseWheelScrolled) {
-			player_Scroll();
-			render();
-			sf::sleep(sf::milliseconds(400));
-		}
+		/*
+			else if (this->ev.type == sf::Event::MouseWheelScrolled) {
+				player_Scroll();
+				render();
+				sf::sleep(sf::milliseconds(400));
+			}
+		*/
 	}
 }
 
@@ -250,10 +254,8 @@ void Game::player_Click()
 		{
 			this->window->clear(sf::Color::White);
 			//this->in_sequence("Assets/score/past.txt");
-			in_sequence.open("Assets/score.past.txt");
-			main_Menu_Score();
-			draw_Background_Image(*window);
-			draw_Player_Chip(*window);
+			//in_sequence.open("Assets/score.past.txt");
+			main_Menu_Score(*window);
 			statetype = StateType::Score;
 
 		}
@@ -350,12 +352,14 @@ void Game::player_Click()
 		break;
 	case StateType::Score:
 		statetype = StateType::MainMenu;
-		reset_Board();
 		break;
 	case StateType::GameOver:
 		if (mouse_Position.x >= 125 && mouse_Position.x <= 530 && mouse_Position.y >= 380 && mouse_Position.y <= 600) {
+			window->clear();
 			statetype = StateType::MainMenu;
 			std::cout << "button pressed" << std::endl;
+			music_game_end.stop();
+			music.play();
 		}
 
 		break;
@@ -417,17 +421,14 @@ bool Game::try_To_Play(int col)
 				//std::cout << "sequence is : " << sequence << std::endl;
 				draw_Player_Chip(*(this -> window));
 				render();
-				//std::cout << "the player has won" << std::endl;
-				//std::cout << "the player has won" << std::endl;
-				//std::cout << "the player has won" << std::endl;
-				//std::cout << "the player has won" << std::endl;
-				//std::cout << "the player has won" << std::endl;
-				//std::cout << "the player has won" << std::endl;
-				//std::cout << "the player has won" << std::endl;
+				
 				if (statetype == StateType::Game){
 					sequence += std::to_string(col + 1);
+					addtowin();
+					music.stop();
+					music_game_end.play();
 					game_over_animation();
-					game_End(*window);
+					game_End(*window); 
 					statetype = StateType::GameOver;
 				}
 				else if(statetype == StateType::Score){
@@ -559,6 +560,7 @@ int Game::best_move(std::string seq)  //returns 0 based index of best move
 	else if (seq == "44444") {
 		return 1;
 	}
+
 	else if (seq == "4444424") {
 		return 1;
 	}
@@ -571,6 +573,7 @@ int Game::best_move(std::string seq)  //returns 0 based index of best move
 			return 0;
 		}
 		int bestmove = 1,bestscore= maintain(seq + '1');
+		render();
 		for (int j = 2; j <= 7; j++) 
 		{
 			if (position.isWinningMove(j - 1) && position.canPlay(j-1)){
@@ -582,7 +585,6 @@ int Game::best_move(std::string seq)  //returns 0 based index of best move
 				bestmove = j;
 				
 			}
-			render();
 			
 		}
 		return bestmove - 1;
@@ -677,7 +679,7 @@ void Game::player_Scroll()
 	case StateType::GameOver:
 		break;
 	case StateType::Score:
-		main_Menu_Score();
+		//main_Menu_Score();
 		break;
 	default:
 		break;
@@ -697,8 +699,9 @@ void Game::game_over_animation()
 
 }
 
-void Game::main_Menu_Score()
+void Game::main_Menu_Score(sf::RenderWindow& window)
 {
+	/*
 	reset_Board();
 	static std::ifstream in_sequence("Assets/score/past.txt");
 	std::string data;
@@ -710,6 +713,123 @@ void Game::main_Menu_Score()
 		try_To_Play(col-1);
 		std::cout << "played col = " << col-1 << std::endl;
 	}
+	*/
+
+	sf::Texture texture_score;
+	sf::Sprite score_sprite;
+
+	if (!pvp) 
+		{	
+
+		texture_score.loadFromFile("Assets/score/score.png");
+		score_sprite.setTexture(texture_score);
+		window.draw(score_sprite);
+		std::ifstream in_sequence("Assets/score/past.txt");
+		std::string data;
+		std::getline(in_sequence, data);
+		int win,loss;
+		win = (int(data[0]) - 48)*100+ (int(data[1]) - 48) * 10+ (int(data[2]) - 48) * 1;
+		std::getline(in_sequence, data);
+		loss = (int(data[0]) - 48)*100+ (int(data[1]) - 48) * 10+ (int(data[2]) - 48) * 1;
+		sf::Text text;
+		text.setFont(font);
+		text.setCharacterSize(60);
+		if (win > 99)
+		{
+			text.setPosition(200, 420);
+		}
+		else
+		{
+			text.setPosition(220, 420);
+		}
+		text.setString(std::to_string(win));
+		window.draw(text);
+		text.setPosition(415, 420);
+		text.setString(std::to_string(loss));
+		window.draw(text);
+		in_sequence.close();
+	}
+	else
+	{
+		texture_score.loadFromFile("Assets/score/scorepvp.png");
+		score_sprite.setTexture(texture_score);
+		window.draw(score_sprite);
+		std::ifstream in_sequence2("Assets/score/past2.txt");
+		std::string data;
+		std::getline(in_sequence2, data);
+		int win, loss;
+		win = (int(data[0]) - 48) * 100 + (int(data[1]) - 48) * 10 + (int(data[2]) - 48) * 1;
+		std::getline(in_sequence2, data);
+		loss = (int(data[0]) - 48) * 100 + (int(data[1]) - 48) * 10 + (int(data[2]) - 48) * 1;
+		sf::Text text;
+		text.setFont(font);
+		text.setCharacterSize(60);
+		if (win > 99)
+		{
+			text.setPosition(200, 420);
+		}
+		else
+		{
+			text.setPosition(220, 420);
+		}
+		text.setString(std::to_string(win));
+		window.draw(text);
+		text.setPosition(415, 420);
+		text.setString(std::to_string(loss));
+		window.draw(text);
+		in_sequence2.close();
+	}
+
+}
+
+void Game::addtowin()
+{
+
+
+	//recieve previous win or loss data
+	std::cout << position.moves << std::endl;
+	std::ifstream in_sequence;
+	if (!pvp) {
+		in_sequence.open("Assets/score/past.txt");
+	}
+	else
+		in_sequence.open("Assets/score/past2.txt");
+
+	std::string data;
+	std::getline(in_sequence, data);
+	std::cout << data << std::endl;
+	int win, loss;
+	win = (int(data[0]) - 48) * 100 + (int(data[1]) - 48) * 10 + (int(data[2]) - 48) * 1;
+	std::cout << data << std::endl;
+	std::getline(in_sequence, data);
+	loss = (int(data[0]) - 48) * 100 + (int(data[1]) - 48) * 10 + (int(data[2]) - 48) * 1;
+	std::cout << "win = " << win << " and loss = " << loss << std::endl;
+	in_sequence.close();
+	if (position.nbMoves() % 2 == 1) {
+		win++;
+	}
+	else loss++;
+
+
+	//file handling to write  
+	std::ofstream fout;
+	if (!pvp) {
+		fout.open("Assets/score/past.txt");
+	}
+	else
+		fout.open("Assets/score/past2.txt");
+
+	auto new_str = std::string(3 - std::min(3, (int)std::to_string(win).length()), '0') + std::to_string(win);
+	auto temp_str = new_str + "\n";
+	new_str = std::string(3 - std::min(3, (int)std::to_string(loss).length()), '0') + std::to_string(loss);
+	temp_str = temp_str + new_str + "\n";
+	fout << temp_str;
+	std::cout << temp_str << std::endl;
+	fout.close();
+
+
+
+
 }
 
 void Game::game_End(sf::RenderWindow& window)
@@ -724,6 +844,7 @@ void Game::game_End(sf::RenderWindow& window)
 	//std::cout << "game has ended " << std::endl;
 	//window.display();
 	//game_over_animation();
+
 	reset_Board();
 	statetype = StateType::GameOver;
 }

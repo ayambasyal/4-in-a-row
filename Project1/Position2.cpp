@@ -6,7 +6,6 @@ bool Position2::canPlay(int col) const
 }
 
 
-
 /*
        * Plays a sequence of successive played columns, mainly used to initilize a board.
        * @param seq: a sequence of digits corresponding to the 1-based index of the column played.

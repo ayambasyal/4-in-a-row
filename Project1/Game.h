@@ -26,9 +26,8 @@ class Game
 		sf::VideoMode videoMode;
 		sf::Event ev;
 		Position2 position;
-		sf::Music music;
+		sf::Music music,music_game_end;
 
-		
 
 		//chrono time variable 
 		//std::chrono::steady_clock clock_game;     may use later
@@ -37,14 +36,10 @@ class Game
 
 		//private functions
 		void init_variables(); // initializes pointers to null so that problemn does not arise later on
-		
 		void init_window();// initializes the window dynamically by using videomode variable manually
 		bool volume,pvp;
 
-		
-	
 	public:
-
 		// to store the complete input sequence
 		std::string sequence;
 		//string corresponding to the board
@@ -52,12 +47,11 @@ class Game
 		StateType statetype = StateType::MainMenu;
 		//public variables
 		sf::Texture texture1, texture2;
+		sf::Font font;
 
 
-
-		//file handling 
-		std::ofstream fout;
-		std::ifstream in_sequence;
+		
+		
 
 
 		//Constructors / Destructors
@@ -89,16 +83,12 @@ class Game
 		//      menu
 		void main_Menu(sf::RenderWindow& window);
 		void main_Menu_Options(sf::RenderWindow& window);
-		void main_Menu_Score();
-
-
+		void main_Menu_Score(sf::RenderWindow& window);
 
 		int best_move(std::string seq);
 		void game_over_animation();
 
-
-
-
+		void addtowin();
 
 	};
 
