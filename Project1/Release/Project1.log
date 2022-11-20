@@ -1,0 +1,27 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(514,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (Project1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Game.cpp
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\TranspositionTable.hpp(96,40): warning C4244: 'initializing': conversion from 'uint64_t' to 'const size_t', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\solver.hpp(35): message : see reference to class template instantiation 'GameSolver::Connect4::TranspositionTable<49,7,23>' being compiled
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\Game.cpp(219,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\Game.cpp(219,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\Game.cpp(223,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\Game.cpp(223,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Source.cpp
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\TranspositionTable.hpp(96,40): warning C4244: 'initializing': conversion from 'uint64_t' to 'const size_t', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\solver.hpp(35): message : see reference to class template instantiation 'GameSolver::Connect4::TranspositionTable<49,7,23>' being compiled
+  maintain.cpp
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\TranspositionTable.hpp(96,40): warning C4244: 'initializing': conversion from 'uint64_t' to 'const size_t', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\solver.hpp(35): message : see reference to class template instantiation 'GameSolver::Connect4::TranspositionTable<49,7,23>' being compiled
+  solver.cpp
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\TranspositionTable.hpp(96,40): warning C4244: 'initializing': conversion from 'uint64_t' to 'const size_t', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\solver.hpp(35): message : see reference to class template instantiation 'GameSolver::Connect4::TranspositionTable<49,7,23>' being compiled
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\TranspositionTable.hpp(135,14): warning C4244: '=': conversion from 'uint64_t' to 'unsigned int', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\TranspositionTable.hpp(131): message : while compiling class template member function 'void GameSolver::Connect4::TranspositionTable<49,7,23>::put(uint64_t,unsigned char)'
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\solver.cpp(95): message : see reference to function template instantiation 'void GameSolver::Connect4::TranspositionTable<49,7,23>::put(uint64_t,unsigned char)' being compiled
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\solver.hpp(35): message : see reference to class template instantiation 'GameSolver::Connect4::TranspositionTable<49,7,23>' being compiled
+  Generating code
+  0 of 325 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Project1.vcxproj -> C:\Users\97798\Desktop\project 1\wowiawo\Release\4inarow.exe

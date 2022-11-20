@@ -1,0 +1,13 @@
+﻿  Game.cpp
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\TranspositionTable.hpp(96,40): warning C4244: 'initializing': conversion from 'uint64_t' to 'const size_t', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\solver.hpp(35): message : see reference to class template instantiation 'GameSolver::Connect4::TranspositionTable<49,7,23>' being compiled
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\Game.cpp(126,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\Game.cpp(126,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\Game.cpp(130,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\Game.cpp(130,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  maintain.cpp
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\TranspositionTable.hpp(96,40): warning C4244: 'initializing': conversion from 'uint64_t' to 'const size_t', possible loss of data
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\solver.hpp(35): message : see reference to class template instantiation 'GameSolver::Connect4::TranspositionTable<49,7,23>' being compiled
+  Generating Code...
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\maintain.cpp(67): warning C4715: 'maintain': not all control paths return a value
+  Project1.vcxproj -> C:\Users\97798\Desktop\project 1\wowiawo\Debug\Project1.exe
