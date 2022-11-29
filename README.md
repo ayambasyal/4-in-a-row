@@ -16,3 +16,4 @@ for apple user, the executable is not present so you need to make an executable 
 4. restudy c++ basics and some boolean mathematics and implementation of basic of slope and it's implementation
 5. ask in forums or mail me @ basyalaayam@gmail.com
 
+> you are as strong as your weakest link
