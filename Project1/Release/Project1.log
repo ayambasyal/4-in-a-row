@@ -20,8 +20,8 @@ C:\Users\97798\Desktop\project 1\wowiawo\Project1\TranspositionTable.hpp(131): m
 C:\Users\97798\Desktop\project 1\wowiawo\Project1\solver.cpp(95): message : see reference to function template instantiation 'void GameSolver::Connect4::TranspositionTable<49,7,23>::put(uint64_t,unsigned char)' being compiled
 C:\Users\97798\Desktop\project 1\wowiawo\Project1\solver.hpp(35): message : see reference to class template instantiation 'GameSolver::Connect4::TranspositionTable<49,7,23>' being compiled
   Generating code
-  0 of 325 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+C:\Users\97798\Desktop\project 1\wowiawo\Project1\maintain.cpp(33): warning C4715: 'maintain': not all control paths return a value
+  All 325 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   Project1.vcxproj -> C:\Users\97798\Desktop\project 1\wowiawo\Release\4inarow.exe
